@@ -7,7 +7,7 @@ Environment images hierarchy to build Docker containers running [Alpine linux][a
 
 The following describes the containers that are available and the inheritance chain:
 
-```
+
 | [alpine-base](https://github.com/rawmind0/alpine-base)
 ├─ alpine-go-builder
 ├─ alpine-monit
@@ -16,7 +16,7 @@ The following describes the containers that are available and the inheritance ch
 |  ├─ alpine-skydns
 ├─ alpine-tools
 |  ├─ rancher-tools
-```
+
 
 ### alpine-base
 
