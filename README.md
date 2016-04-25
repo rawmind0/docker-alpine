@@ -3,7 +3,8 @@ docker-alpine
 
 Environment images hierarchy to build Docker containers running [Alpine linux][alpinelinux], [monit][monit] as process management and [confd][confd] as config management.
 
-## Containers
+Containers
+=============
 
 The following describes the containers that are available and the inheritance chain:
 
@@ -18,7 +19,7 @@ The following describes the containers that are available and the inheritance ch
     * [rancher-tools](https://github.com/rawmind0/rancher-tools)
 
 
-### alpine-base
+## alpine-base
 
 This image is the base for all containers. It contains Alpine Linux with bash, openssl and curl. It clocks in at a tiny 4 MB.
 
@@ -39,7 +40,7 @@ A base image to run anything. It's based in rawmind/alpine-base, adding monit as
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-monit/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-monit/tags/)).
 
-### alpine-jvm8
+#### alpine-jvm8
 
 A base image to run any jvm8 app. It's based in rawmind/alpine-monit, adding jvm8 to make able to build jvm8 app's.
 
