@@ -22,11 +22,9 @@ The following describes the containers that are available and the inheritance ch
 
 This image is the base for all containers. It contains Alpine Linux with bash, openssl and curl. It clocks in at a tiny 4 MB.
 
-Github repo, ([alpine-base](https://github.com/rawmind0/alpine-base)).
-
-Latest version is `0.3.3-3`, ([Dockerfile](https://github.com/rawmind0/alpine-base/blob/master/Dockerfile)).
-
-Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-base/tags/)).
+.Github repo, ([alpine-base](https://github.com/rawmind0/alpine-base)).
+.Latest version is `0.3.3-3`, ([Dockerfile](https://github.com/rawmind0/alpine-base/blob/master/Dockerfile)).
+.Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-base/tags/)).
 
 ### alpine-go-builder
 
