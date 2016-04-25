@@ -16,27 +16,16 @@ The following describes the containers that are available and the inheritance ch
 |  ├─ alpine-skydns
 ├─ alpine-tools
 |  ├─ rancher-tools
-
 ```
-
-  dns_search:
-  - service.consul
-  - innotechapp.com
-
-docker run  -t --rm \
-       -v <code-path>:/opr/src/<app> \
-       -e GO_UID=$GO_UID \
-       -e GO_GID=$GO_GID \
-       -e GO_PIPELINE_COUNTER=$GO_PIPELINE_COUNTER \
-       --name=${GO_PIPELINE_NAME}-${GO_PIPELINE_COUNTER}-${GO_STAGE_NAME} \
-       alpine-go-builder:<version> ./build.sh"
 
 ### alpine-base
 
 This image is the base for all containers. It contains Alpine Linux with bash, openssl and curl. It clocks in at a tiny 4 MB.
 
-Github repo, ([alpine-base](https://github.com/rawmind0/alpine-base))
+Github repo, ([alpine-base](https://github.com/rawmind0/alpine-base)).
+
 Latest version is `0.3.3-3`, ([Dockerfile](https://github.com/rawmind0/alpine-base/blob/master/Dockerfile)).
+
 Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-base/tags/)).
 
 ### alpine-go-builder
