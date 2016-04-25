@@ -1,0 +1,93 @@
+docker-alpine
+=============
+
+Environment images hierarchy to build Docker containers running [Alpine linux][alpinelinux], [monit][monit] as process management and [confd][confd] as config management.
+
+## Containers
+
+The following describes the containers that are available and the inheritance chain:
+
+```
+| alpine-base
+├─ alpine-go-builder
+├─ alpine-monit
+|  ├─ alpine-jvm8
+|  |  ├─ alpine-sbt-builder
+|  ├─ alpine-skydns
+├─ alpine-tools
+|  ├─ rancher-tools
+
+```
+
+  dns_search:
+  - service.consul
+  - innotechapp.com
+
+docker run  -t --rm \
+       -v <code-path>:/opr/src/<app> \
+       -e GO_UID=$GO_UID \
+       -e GO_GID=$GO_GID \
+       -e GO_PIPELINE_COUNTER=$GO_PIPELINE_COUNTER \
+       --name=${GO_PIPELINE_NAME}-${GO_PIPELINE_COUNTER}-${GO_STAGE_NAME} \
+       alpine-go-builder:<version> ./build.sh"
+
+### alpine-base
+
+This image is the base for all containers. It contains Alpine Linux with bash, openssl and curl. It clocks in at a tiny 4 MB.
+
+Github repo, ([alpine-base](https://github.com/rawmind0/alpine-base))
+Latest version is `0.3.3-3`, ([Dockerfile](https://github.com/rawmind0/alpine-base/blob/master/Dockerfile)).
+Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-base/tags/)).
+
+### alpine-go-builder
+
+A base image to build any golang app. It's based in rawmind/alpine-base, adding git, mercurial, bzr, make and go, to make able to build golang app's.
+
+Github repo, ([alpine-go-builder](https://github.com/rawmind0/alpine-go-builder))
+Latest version is `0.3.3-1`, ([Dockerfile](https://github.com/rawmind0/alpine-go-builder/blob/master/Dockerfile)).
+Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-go-builder/tags/)).
+
+### alpine-monit
+
+A base image to run anything. It's based in rawmind/alpine-base, adding monit as process management.
+
+Github repo, ([alpine-monit](https://github.com/rawmind0/alpine-monit))
+Latest version is `0.3.3-2`, ([Dockerfile](https://github.com/rawmind0/alpine-monit/blob/master/Dockerfile)).
+Image versions from ([Tags](https://hub.docker.com/r/rawmind/alpine-monit/tags/)).
+
+### alpine-jvm8
+
+A base image to run any jvm8 app. It's based in rawmind/alpine-monit, adding jvm8 to make able to build jvm8 app's.
+
+Github repo, ([alpine-jvm8](https://github.com/rawmind0/alpine-jvm8))
+Latest version is `1.8.74-1`, ([Dockerfile](https://github.com/rawmind0/alpine-jvm8/blob/master/Dockerfile)).
+Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-jvm8/tags/)).
+
+### alpine-sbt-builder
+
+A base image to build any jvm8 app with sbt. It's based in rawmind/alpine-jvm8, adding sbt to make able to build jvm8 app's.
+
+Github repo, ([alpine-sbt-builder](https://github.com/rawmind0/alpine-sbt-builder))
+Latest version is `0.13.11-2`, ([Dockerfile](https://github.com/rawmind0/alpine-sbt-builder/blob/master/Dockerfile)).
+Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-sbt-builder/tags/)).
+
+### alpine-tools
+
+A base image to expose tools to services. It's based in rawmind/alpine-base, adding confd as config management and shraing volume /opt/tools
+
+Github repo, ([alpine-tools](https://github.com/rawmind0/alpine-tools))
+Latest version is `0.3.3-3`, ([Dockerfile](https://github.com/rawmind0/alpine-tools/blob/master/Dockerfile)).
+Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-tools/tags/)).
+
+### rancher-tools
+
+A base image to expose tools to rancher services. It's based in rawmind/alpine-tools, adding confd and monit scripts to the image.
+
+Github repo, ([rancher-tools](https://github.com/rawmind0/rancher-tools))
+Latest version is `0.3.3`, ([Dockerfile](https://github.com/rawmind0/rancher-tools/blob/master/Dockerfile)).
+Image versions ([Tags](https://hub.docker.com/r/rawmind/rancher-tools/tags/)).
+
+
+[alpinelinux]: https://www.alpinelinux.org/
+[monit]: https://mmonit.com/monit/
+[confd]: https://github.com/kelseyhightower/confd
