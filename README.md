@@ -13,7 +13,7 @@ The following describes the containers that are available and the inheritance ch
   * [alpine-monit](https://github.com/rawmind0/alpine-monit)
     * [alpine-jvm8](https://github.com/rawmind0/alpine-jvm8)
       * [alpine-sbt-builder](https://github.com/rawmind0/alpine-sbt-builder)
-    * [alpine-skydns]
+    * [alpine-skydns](https://github.com/rawmind0/alpine-skydns.git)
   * [alpine-tools](https://github.com/rawmind0/alpine-tools)
     * [rancher-tools](https://github.com/rawmind0/rancher-tools)
 
