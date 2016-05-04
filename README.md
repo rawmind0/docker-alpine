@@ -13,12 +13,15 @@ The following describes the containers that are available and the inheritance ch
   * [alpine-monit](https://github.com/rawmind0/alpine-monit)
     * [alpine-jvm8](https://github.com/rawmind0/alpine-jvm8)
       * [alpine-sbt-builder](https://github.com/rawmind0/alpine-sbt-builder)
+      * [alpine-nexus](https://github.com/rawmind0/alpine-nexus)
     * [alpine-nginx](https://github.com/rawmind0/alpine-nginx.git)
     * [alpine-traefik](https://github.com/rawmind0/alpine-traefik.git)
   * [alpine-tools](https://github.com/rawmind0/alpine-tools)
     * [rancher-tools](https://github.com/rawmind0/rancher-tools)
       * [rancher-traefik](https://github.com/rawmind0/rancher-traefik.git)
-
+  * [alpine-redis](https://github.com/rawmind0/alpine-redis)
+  * [alpine-haproxy](https://github.com/rawmind0/alpine-haproxy)
+  * [alpine-skydns](https://github.com/rawmind0/alpine-skydns)
 
 ### alpine-base
 
@@ -55,6 +58,13 @@ A base image to build any jvm8 app with sbt. It's based in rawmind/alpine-jvm8, 
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-sbt-builder/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-sbt-builder/tags/)).
 
+### alpine-nexus
+
+A base image to run nexus server. It's based in rawmind/alpine-jvm8.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/alpine-nexus/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-nexus/tags/)).
+
 ### alpine-nginx
 
 A base image to run nginx. It's based in rawmind/alpine-monit, adding nginx to make able to run it.
@@ -90,7 +100,30 @@ A base image to expose tools to traefik service running in rancher. It's based i
 * Latest version ([Dockerfile](https://github.com/rawmind0/rancher-tools/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/rancher-tools/tags/)).
 
+### alpine-redis
+
+A base image to run redis. It's based in rawmind/alpine-base.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/alpine-redis/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-redis/tags/)).
+
+### alpine-haproxy
+
+A base image to run haproxy. It's based in rawmind/alpine-base.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/alpine-haproxy/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-haproxy/tags/)).
+
+### alpine-skydns
+
+A base image to run skydns. It's based in rawmind/alpine-base.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/alpine-skydns/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-skydns/tags/)).
+
 
 [alpinelinux]: https://www.alpinelinux.org/
 [monit]: https://mmonit.com/monit/
 [confd]: https://github.com/kelseyhightower/confd
+
+
