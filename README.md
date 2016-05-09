@@ -22,6 +22,7 @@ The following describes the containers that are available and the inheritance ch
   * [alpine-redis](https://github.com/rawmind0/alpine-redis)
   * [alpine-haproxy](https://github.com/rawmind0/alpine-haproxy)
   * [alpine-skydns](https://github.com/rawmind0/alpine-skydns)
+  * [web-test](https://github.com/rawmind0/web-test)
 
 ### alpine-base
 
@@ -121,6 +122,12 @@ A base image to run skydns. It's based in rawmind/alpine-base.
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-skydns/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-skydns/tags/)).
 
+### web-test
+
+This image runs a web service in 8080 port, used for testing. It comes from rawmind/alpine-base.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/web-test/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/web-test/tags/)).
 
 [alpinelinux]: https://www.alpinelinux.org/
 [monit]: https://mmonit.com/monit/
