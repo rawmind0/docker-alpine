@@ -3,6 +3,19 @@ docker-alpine
 
 Environment images hierarchy to build Docker containers running [Alpine linux][alpinelinux], [monit][monit] as process management and [confd][confd] as config management.
 
+## Users
+
+The following describe the different users that run the services.
+
+- nexus - 10000 - nexus - 10000
+- traefik - 10001 - traefik - 10001
+- zookeeper - 10002 - zookeeper - 10002
+- kafka - 10003 - kafka - 10003
+- nginx - 10004 - nginx - 10004
+- etcd - 10005 - etcd - 10005
+- vamp - 10006 - vamp - 10006
+
+
 ## Containers
 
 The following describes the containers that are available and the inheritance chain:
@@ -12,16 +25,24 @@ The following describes the containers that are available and the inheritance ch
   * [alpine-volume](https://github.com/rawmind0/alpine-volume)
   * [alpine-go-builder](https://github.com/rawmind0/alpine-go-builder)
   * [alpine-monit](https://github.com/rawmind0/alpine-monit)
+    * [alpine-etcd](https://github.com/rawmind0/alpine-etcd)
     * [alpine-jvm8](https://github.com/rawmind0/alpine-jvm8)
       * [alpine-sbt-builder](https://github.com/rawmind0/alpine-sbt-builder)
       * [alpine-nexus](https://github.com/rawmind0/alpine-nexus)
       * [alpine-zk](https://github.com/rawmind0/alpine-zk)
+      * [alpine-kafka](https://github.com/rawmind0/alpine-kafka)
+      * [alpine-vamp](https://github.com/rawmind0/alpine-vamp)
     * [alpine-nginx](https://github.com/rawmind0/alpine-nginx.git)
+      * [alpine-vamp-ui](https://github.com/rawmind0/alpine-vamp-ui)
     * [alpine-traefik](https://github.com/rawmind0/alpine-traefik.git)
   * [alpine-tools](https://github.com/rawmind0/alpine-tools)
     * [rancher-tools](https://github.com/rawmind0/rancher-tools)
+      * [rancher-etcd](https://github.com/rawmind0/rancher-etcd.git)
+      * [rancher-kafka](https://github.com/rawmind0/rancher-kafka.git)
       * [rancher-traefik](https://github.com/rawmind0/rancher-traefik.git)
       * [rancher-zk](https://github.com/rawmind0/rancher-zk.git)
+    * [k8s-tools](https://github.com/rawmind0/k8s-tools)
+      * [k8s-zk](https://github.com/rawmind0/k8s-zk.git)
   * [alpine-redis](https://github.com/rawmind0/alpine-redis)
   * [alpine-haproxy](https://github.com/rawmind0/alpine-haproxy)
   * [alpine-skydns](https://github.com/rawmind0/alpine-skydns)
@@ -118,12 +139,33 @@ A base image to expose tools to traefik service running in rancher. It's based i
 * Latest version ([Dockerfile](https://github.com/rawmind0/rancher-traefik/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/rancher-traefik/tags/)).
 
-### rancher-zk
+### rancher-kafka
 
-A base image to expose tools to zookeeper service running in rancher. It's based in rawmind/rancher-tools, adding confd templates to generate traefik config.
+A base image to expose tools to kafka service running in rancher. It's based in rawmind/rancher-tools, adding confd templates to generate kafka config.
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/rancher-zk/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/rancher-zk/tags/)).
+
+### rancher-zk
+
+A base image to expose tools to zookeeper service running in rancher. It's based in rawmind/rancher-tools, adding confd templates to generate zookeeper config.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/rancher-zk/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/rancher-zk/tags/)).
+
+### k8s-tools
+
+A base image to expose tools to kubernetes services. It's based in rawmind/alpine-tools, adding confd and monit scripts to the image.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/k8s-tools/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/k8s-tools/tags/)).
+
+### k8s-zk
+
+A base image to expose tools to zookeeper service running in kubernetes. It's based in rawmind/k8s-tools, adding confd templates to generate zookeeper config.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/k8s-zk/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/k8s-zk/tags/)).
 
 ### alpine-redis
 
