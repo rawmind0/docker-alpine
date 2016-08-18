@@ -14,6 +14,7 @@ The following describe the different users that run the services.
 - nginx - 10004 - nginx - 10004
 - etcd - 10005 - etcd - 10005
 - vamp - 10006 - vamp - 10006
+- haproxy - 10007 - haproxy - 10007
 
 
 ## Containers
@@ -26,6 +27,7 @@ The following describes the containers that are available and the inheritance ch
   * [alpine-go-builder](https://github.com/rawmind0/alpine-go-builder)
   * [alpine-monit](https://github.com/rawmind0/alpine-monit)
     * [alpine-etcd](https://github.com/rawmind0/alpine-etcd)
+    * [alpine-haproxy](https://github.com/rawmind0/alpine-haproxy)
     * [alpine-jvm8](https://github.com/rawmind0/alpine-jvm8)
       * [alpine-sbt-builder](https://github.com/rawmind0/alpine-sbt-builder)
       * [alpine-nexus](https://github.com/rawmind0/alpine-nexus)
@@ -42,6 +44,7 @@ The following describes the containers that are available and the inheritance ch
       * [rancher-traefik](https://github.com/rawmind0/rancher-traefik.git)
       * [rancher-zk](https://github.com/rawmind0/rancher-zk.git)
     * [k8s-tools](https://github.com/rawmind0/k8s-tools)
+      * [k8s-kafka](https://github.com/rawmind0/k8s-kafka.git)
       * [k8s-zk](https://github.com/rawmind0/k8s-zk.git)
   * [alpine-redis](https://github.com/rawmind0/alpine-redis)
   * [alpine-haproxy](https://github.com/rawmind0/alpine-haproxy)
@@ -75,6 +78,13 @@ A base image to run anything. It's based in rawmind/alpine-base, adding monit as
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-monit/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-monit/tags/)).
+
+### alpine-haproxy
+
+A base image to run any haproxy base. It's based in rawmind/alpine-monit, building and installing haproxy.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/alpine-haproxy/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-haproxy/tags/)).
 
 ### alpine-jvm8
 
