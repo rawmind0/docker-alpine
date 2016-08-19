@@ -184,13 +184,6 @@ A base image to run redis. It's based in rawmind/alpine-base.
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-redis/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-redis/tags/)).
 
-### alpine-haproxy
-
-A base image to run haproxy. It's based in rawmind/alpine-base.
-
-* Latest version ([Dockerfile](https://github.com/rawmind0/alpine-haproxy/blob/master/Dockerfile)).
-* Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-haproxy/tags/)).
-
 ### alpine-skydns
 
 A base image to run skydns. It's based in rawmind/alpine-base.
