@@ -18,7 +18,7 @@ The following describe the different users that run the services.
 
 ## Catalog
 
-The following repo provides catalog package to deploy services in rancher. There are packages for cattle and for k8s.
+The following repo provides rancher catalog package to deploy services. There are packages for cattle and for k8s.
 
 * [service-catalog](https://github.com/rawmind0/service-catalog)
 
