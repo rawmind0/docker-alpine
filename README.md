@@ -66,6 +66,8 @@ This image is the base for all containers. It contains Alpine Linux with bash, o
 
 A base image to run any storage volume for a service. It's based in rawmind/alpine-base.
 
+It creates and prepares $SERVICE_VOLUME volume with $SERVICE_UID and $SERVICE_GID owners. 
+
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-volume/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-volume/tags/)).
 
@@ -80,6 +82,11 @@ A base image to build any golang app. It's based in rawmind/alpine-base, adding 
 
 A base image to run anything. It's based in rawmind/alpine-base, adding monit as process management.
 
+- It compiles and install monit under /opt/monit. 
+- Monit will be used as process management to execute microservices tasks. 
+- From this image, you could build language specific images or microservices images directly.
+- Entrypoint is stablished to execute monit and read configuration from 2 directories, /opt/monit/etc/cond.d and /opt/tools/monit/cond.d if exists (this folder doesn’t exists in this container, it would be provided by configurator).
+
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-monit/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-monit/tags/)).
 
@@ -93,6 +100,9 @@ A base image to run any haproxy base. It's based in rawmind/alpine-monit, buildi
 ### alpine-jvm8
 
 A base image to run any jvm8 app. It's based in rawmind/alpine-monit, adding jvm8 to make able to build jvm8 app's.
+
+- Install oracle jre8 under /opt/jre
+- From this image, you could build your jvm microservices.
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-jvm8/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-jvm8/tags/)).
@@ -111,9 +121,32 @@ A base image to run nexus server. It's based in rawmind/alpine-jvm8.
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-nexus/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-nexus/tags/)).
 
+### alpine-kafka
+
+A base image to run kafka server. It's based in rawmind/alpine-jvm8.
+
+- Install and configure kafka under /opt/kafka.
+- It provides a monit config to run kafka. /opt/monit/etc/conf.d/monit-service.cfg 
+- It provides a script to start/stop/restart kafka.
+- If it’s run alone, it gets a default configuration and run kafka. 
+- If it’s run with rancher-kafka or with k8s-kafka in a rancher env, it runs kafka and confd to get dynamic config from cattle or kubernetes.
+- Service is started with its own user and group. # kafka-10003 kafka-10003
+- Default options could be overwritten through env variables.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/alpine-kafka/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-kafka/tags/)).
+
 ### alpine-zk
 
 A base image to run zookeeper server. It's based in rawmind/alpine-jvm8.
+
+- Install and configure zookeeper under /opt/zk.
+- It provides a monit config to run zookeeper. /opt/monit/etc/conf.d/monit-service.cfg 
+- It provides a script to start/stop/restart zookeeper.
+- If it’s run alone, it gets a default configuration and run zookeeper. 
+- If it’s run with rancher-zk or with k8s-zk in a rancher env, it runs zookeeper and confd to get dynamic config from cattle or kubernetes.
+- Service is started with its own user and group. # zookeeper-10002 zookeeper-10002
+- Default options could be overwritten through env variables.
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-zk/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-zk/tags/)).
@@ -122,6 +155,14 @@ A base image to run zookeeper server. It's based in rawmind/alpine-jvm8.
 
 A base image to run nginx. It's based in rawmind/alpine-monit, adding nginx to make able to run it.
 
+- Compile and install nginx under /opt/nginx.
+- It provides a monit config to run nginx. /opt/monit/etc/conf.d/monit-service.cfg 
+- It provides a script to start/stop/restart nginx.
+- From this image, you could build your html microservices. 
+- It could be also used as loadbalancer/proxy base.
+- Service is started with its own user and group.
+- Default options could be overwritten through env variables.
+
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-nginx/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-nginx/tags/)).
 
@@ -129,12 +170,38 @@ A base image to run nginx. It's based in rawmind/alpine-monit, adding nginx to m
 
 A base image to run traefik. It's based in rawmind/alpine-monit, adding traefik and a basic config to make able to run it.
 
+- Install and configure traefik under /opt/traefik.
+- It provides a monit config to run traefik. /opt/monit/etc/conf.d/monit-service.cfg 
+- It provides a script to start/stop/restart traefik.
+- If it’s run alone, it gets a default configuration and run traefik. 
+- If it’s run with rancher-traefik in a cattle env, it runs traefik and confd to get dynamic config.
+- Service is started with its own user and group.
+- Default options could be overwritten through env variables.
+
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-traefik/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-traefik/tags/)).
 
 ### alpine-tools
 
 A base image to expose tools to services. It's based in rawmind/alpine-base, adding confd as config management and shraing volume /opt/tools
+ 
+- Creates and shared with the executors, $SERVICE_VOLUME /opt/tools with $SERVICE_UID and $SERVICE_GID owners.
+- It compiles statically and install confd under $SERVICE_VOLUME/confd.
+- The volume is used to share all software tools for configuration aids to the microservices. 
+
+Initial volume structure:
+
+```
+/opt/tools/
+  confd/          # Confd directory
+    etc/
+      templates/  # confd template directory
+      conf.d/     # confd toml directory
+    bin/          # confd bin directory
+  monit/
+    conf.d/       # Monit config directory
+  scripts/        # Custom scripts directory (for future use)
+```
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-tools/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-tools/tags/)).
@@ -143,12 +210,22 @@ A base image to expose tools to services. It's based in rawmind/alpine-base, add
 
 A base image to expose tools to rancher services. It's based in rawmind/alpine-tools, adding confd and monit scripts to the image.
 
+- Contextualize the configuration tools to talk with rancher-metadata. 
+- Provides a monit config to run conf.d. $SERVICE_VOLUME/monit/conf.d/monit-conf.cfg
+- Provides a script to start/stop/restart confd. 
+- Confd is default configured to connect to rancher-metadata service. $SERVICE_VOLUME/confd/bin/service-conf.sh
+- Default options could be overwritten through env variables. 
+
 * Latest version ([Dockerfile](https://github.com/rawmind0/rancher-tools/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/rancher-tools/tags/)).
 
 ### rancher-traefik
 
 A base image to expose tools to traefik service running in rancher. It's based in rawmind/rancher-tools, adding confd templates to generate traefik config.
+
+- Sets rancher configuration tools to get config for traefik.
+- Provides confd toml’s and templates to generate traefik dynamic config from rancher-metadata.
+- To provide the volume, it has to run once as a alpine-traefik sidekick.
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/rancher-traefik/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/rancher-traefik/tags/)).
@@ -157,12 +234,20 @@ A base image to expose tools to traefik service running in rancher. It's based i
 
 A base image to expose tools to kafka service running in rancher. It's based in rawmind/rancher-tools, adding confd templates to generate kafka config.
 
+- Sets rancher configuration tools to get config for kafka.
+- Provides confd toml’s and templates to generate kafka dynamic config from rancher-metadata.
+- To provide the volume, it has to run once as a alpine-kafka sidekick.
+
 * Latest version ([Dockerfile](https://github.com/rawmind0/rancher-zk/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/rancher-zk/tags/)).
 
 ### rancher-zk
 
 A base image to expose tools to zookeeper service running in rancher. It's based in rawmind/rancher-tools, adding confd templates to generate zookeeper config.
+
+- Sets rancher configuration tools to get config for zookeeper.
+- Provides confd toml’s and templates to generate zookeeper dynamic config from rancher-metadata.
+- To provide the volume, it has to run once as a alpine-zk sidekick.
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/rancher-zk/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/rancher-zk/tags/)).
@@ -171,12 +256,31 @@ A base image to expose tools to zookeeper service running in rancher. It's based
 
 A base image to expose tools to kubernetes services. It's based in rawmind/alpine-tools, adding confd and monit scripts to the image.
 
+- Contextualize the configuration tools to talk with kubernetes etcd. 
+- Provides a monit config to run conf.d. $SERVICE_VOLUME/monit/conf.d/monit-conf.cfg
+- Provides a script to start/stop/restart confd. 
+- Confd is default configured to connect to kubernetes etcd service. $SERVICE_VOLUME/confd/bin/service-conf.sh
+- Default options could be overwritten through env variables. 
+
 * Latest version ([Dockerfile](https://github.com/rawmind0/k8s-tools/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/k8s-tools/tags/)).
+
+### k8s-kafka
+
+A base image to expose tools to kafka service running in kubernetes. It's based in rawmind/k8s-tools, adding confd templates to generate kafka config.
+
+- Sets k8s configuration tools to get config for kafka.
+- Provides confd toml’s and templates to generate kafka dynamic config from k8s etcd.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/k8s-kafka/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/k8s-kafka/tags/)).
 
 ### k8s-zk
 
 A base image to expose tools to zookeeper service running in kubernetes. It's based in rawmind/k8s-tools, adding confd templates to generate zookeeper config.
+
+- Sets k8s configuration tools to get config for zookeeper.
+- Provides confd toml’s and templates to generate zookeeper dynamic config from k8s etcd.
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/k8s-zk/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/k8s-zk/tags/)).
