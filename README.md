@@ -16,6 +16,11 @@ The following describe the different users that run the services.
 - vamp - 10006 - vamp - 10006
 - haproxy - 10007 - haproxy - 10007
 
+## Catalog
+
+The following repo provides catalog package to deploy services in rancher. There are packages for cattle and for k8s.
+
+* [service-catalog](https://github.com/rawmind0/service-catalog)
 
 ## Containers
 
@@ -47,7 +52,6 @@ The following describes the containers that are available and the inheritance ch
       * [k8s-kafka](https://github.com/rawmind0/k8s-kafka.git)
       * [k8s-zk](https://github.com/rawmind0/k8s-zk.git)
   * [alpine-redis](https://github.com/rawmind0/alpine-redis)
-  * [alpine-haproxy](https://github.com/rawmind0/alpine-haproxy)
   * [alpine-skydns](https://github.com/rawmind0/alpine-skydns)
   * [web-test](https://github.com/rawmind0/web-test)
 
