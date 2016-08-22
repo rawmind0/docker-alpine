@@ -26,6 +26,8 @@ The following repo provides rancher catalog package to deploy services. There ar
 
 The following describes the containers that are available and the inheritance chain:
 
+![Alt text](docker-hierarchy.png?raw=true "Title")
+
 
 * [alpine-base](https://github.com/rawmind0/alpine-base)
   * [alpine-volume](https://github.com/rawmind0/alpine-volume)
