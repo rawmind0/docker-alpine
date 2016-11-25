@@ -15,6 +15,8 @@ The following describe the different users that run the services.
 - etcd - 10005 - etcd - 10005
 - vamp - 10006 - vamp - 10006
 - haproxy - 10007 - haproxy - 10007
+- postgres - 10008 - postgres - 10008
+- go-dnsmasq - 10009 - go-dnsmasq - 10009
 
 ## Catalog
 
@@ -43,6 +45,7 @@ The following describes the containers that are available and the inheritance ch
       * [alpine-vamp](https://github.com/rawmind0/alpine-vamp)
     * [alpine-nginx](https://github.com/rawmind0/alpine-nginx.git)
       * [alpine-vamp-ui](https://github.com/rawmind0/alpine-vamp-ui)
+    * [alpine-postgres](https://github.com/rawmind0/alpine-postgres.git)
     * [alpine-traefik](https://github.com/rawmind0/alpine-traefik.git)
   * [alpine-tools (configurator)](https://github.com/rawmind0/alpine-tools)
     * [rancher-tools](https://github.com/rawmind0/rancher-tools)
@@ -167,6 +170,20 @@ A base image to run nginx. It's based in rawmind/alpine-monit, adding nginx to m
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-nginx/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-nginx/tags/)).
+
+### alpine-postgres
+
+A base image to run postgres. It's based in rawmind/alpine-monit, adding postgres and a basic config to make able to run it.
+
+- Install and configure postgres under /opt/pgsql.
+- It provides a monit config to run postgres. /opt/monit/etc/conf.d/monit-service.cfg 
+- It provides a script to start/stop/restart postgres.
+- If it’s run alone, it gets a default configuration and run postgres. 
+- Service is started with its own user and group.
+- Default options could be overwritten through env variables.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/alpine-postgres/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-postgres/tags/)).
 
 ### alpine-traefik
 
