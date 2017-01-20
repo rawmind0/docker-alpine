@@ -17,6 +17,7 @@ The following describe the different users that run the services.
 - haproxy - 10007 - haproxy - 10007
 - postgres - 10008 - postgres - 10008
 - go-dnsmasq - 10009 - go-dnsmasq - 10009
+- mesos - 10010 - mesos - 10010
 
 ## Catalog
 
@@ -43,6 +44,7 @@ The following describes the containers that are available and the inheritance ch
       * [alpine-zk](https://github.com/rawmind0/alpine-zk)
       * [alpine-kafka](https://github.com/rawmind0/alpine-kafka)
       * [alpine-vamp](https://github.com/rawmind0/alpine-vamp)
+    * [alpine-mesos-dns](https://github.com/rawmind0/alpine-mesos-dns.git)
     * [alpine-nginx](https://github.com/rawmind0/alpine-nginx.git)
       * [alpine-vamp-ui](https://github.com/rawmind0/alpine-vamp-ui)
     * [alpine-postgres](https://github.com/rawmind0/alpine-postgres.git)
@@ -155,6 +157,19 @@ A base image to run zookeeper server. It's based in rawmind/alpine-jvm8.
 
 * Latest version ([Dockerfile](https://github.com/rawmind0/alpine-zk/blob/master/Dockerfile)).
 * Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-zk/tags/)).
+
+### alpine-mesos-dns
+
+A base image to run mesos-dns. It's based in rawmind/alpine-monit, adding mesos-dns to make able to run it.
+
+- Compile and install mesos-dns under /opt/mesos-dns.
+- It provides a monit config to run mesos-dns. /opt/monit/etc/conf.d/monit-service.cfg 
+- It provides a script to start/stop/restart mesos-dns.
+- Service is started with its own user and group.
+- Default options could be overwritten through env variables.
+
+* Latest version ([Dockerfile](https://github.com/rawmind0/alpine-mesos-dns/blob/master/Dockerfile)).
+* Image versions ([Tags](https://hub.docker.com/r/rawmind/alpine-mesos-dns/tags/)).
 
 ### alpine-nginx
 
