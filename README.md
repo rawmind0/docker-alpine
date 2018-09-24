@@ -18,6 +18,10 @@ The following describe the different users that run the services.
 - postgres - 10008 - postgres - 10008
 - go-dnsmasq - 10009 - go-dnsmasq - 10009
 - mesos - 10010 - mesos - 10010
+- reveal - 10011 - reveal - 10011
+- rancher - 10012 - rancher - 10012
+- mariadb - 10013 - mariadb - 10013
+- jekyll - 10014 - jekyll - 10014
 
 ## Catalog
 
@@ -47,7 +51,11 @@ The following describes the containers that are available and the inheritance ch
     * [alpine-mesos-dns](https://github.com/rawmind0/alpine-mesos-dns.git)
     * [alpine-nginx](https://github.com/rawmind0/alpine-nginx.git)
       * [alpine-vamp-ui](https://github.com/rawmind0/alpine-vamp-ui)
+      * [alpine-revealjs](https://github.com/rawmind0/alpine-revealjs)
+    * [alpine-node](https://github.com/rawmind0/alpine-node.git)
     * [alpine-postgres](https://github.com/rawmind0/alpine-postgres.git)
+    * [alpine-ruby](https://github.com/rawmind0/alpine-ruby.git)
+      * [alpine-jekyll](https://github.com/rawmind0/alpine-jekyll.git)
     * [alpine-traefik](https://github.com/rawmind0/alpine-traefik.git)
   * [alpine-tools (configurator)](https://github.com/rawmind0/alpine-tools)
     * [rancher-tools](https://github.com/rawmind0/rancher-tools)
